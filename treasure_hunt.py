@@ -1,3 +1,4 @@
+# By Matt Lab
 """Udemy 100 Days of Code: Treasure Island
 
 A text-based adventure game where the user makes choices to find the hidden treasure.

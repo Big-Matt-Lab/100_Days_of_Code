@@ -1,3 +1,4 @@
+# By Matt Lab
 """Udemy 100 Days of Code: BMI Calculator
 
 Calculates a user's Body Mass Index (BMI) based on weight and height, 
