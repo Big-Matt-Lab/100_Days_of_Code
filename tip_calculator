@@ -1,8 +1,0 @@
-""" Udemy 100 Days of Code"""
-print("Welcome to the tip calculator!")
-bill = float(input("What is the total bill? "))
-tip = int(input("What percentage tip to leave? 15, 18, or 20: "))
-split = int(input("How many ways should the bill be split? "))
-tip = tip / 100 + 1
-share = bill * tip / split
-print(f"Each person's share is ${share:.2f}")
