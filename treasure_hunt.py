@@ -9,6 +9,8 @@ Python concepts highlighted:
 - Input sanitization ('strip()', 'lower()')
 - Sequential logic and guard clauses to keep code flat (avoiding deep nesting)
 """
+# Python concepts highlighted (additional):
+# - The `sys` module for program control (`sys.exit()`)
 
 
 import sys
@@ -25,6 +27,7 @@ print("\n")
 print("You've landed on a beach and need to move - which way to go?")
 print("""A - Stay on the beach and move around the island or
       B - Head into the jungle.""")
+# Get user input for the first choice and sanitize it.
 move_1 = input("A - Beach or B - Jungle: ").strip().lower()
 if move_1 != 'a':
     print("You've made a poor decision. You've fallen into a hole.")
@@ -36,6 +39,7 @@ print("Congratulations, you are heading the right way!")
 # Second checkpoint: Boat or Inland
 print("Uh oh, a stone jetty blocks your path. There is an old boat on the beach.")
 print("A - Take the boat and row around the jetty or B - move inland?")
+# Get user input for the second choice and sanitize it.
 move_2 = input("A - Boat or B - Inland?: ").strip().lower()
 if move_2 != 'b':
     print("You've made a poor decision. The boat is leaking and sinking quickly.")
@@ -48,6 +52,7 @@ print("Whew, that was the correct choice!")
 print("You've come to an ancient wall with three doors")
 print("Choose which door to pass through.")
 print("The doors are red, blue and green.")
+# Get user input for the third choice and sanitize it.
 print("Choose R for the Red door, B for the blue door and G for the green door.")
 move_3 = input("R - Red or B - Blue or G - Green?: ").strip().lower()
 if move_3 == 'b':

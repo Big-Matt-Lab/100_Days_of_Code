@@ -13,6 +13,8 @@ Python concepts highlighted:
 - Input validation using a loop
 - Concise game logic using modular arithmetic (alternative to extensive if/else)
 """
+# Python concepts highlighted (additional):
+# - Dictionary for mapping values
 
 import random
 
@@ -24,6 +26,9 @@ PLAYS = {0: 'paper', 1: 'scissors', 2: 'rock'}
 def play_rock_paper_scissors():
     """
     Plays a single round of Rock, Paper, Scissors.
+
+    Python concepts highlighted:
+    - `random.randint()` for generating random integers
     """
     print("Let's play Rock, Paper, Scissors!")
 
@@ -33,6 +38,7 @@ def play_rock_paper_scissors():
     # Get user input and validate it, mapping 'r', 'p', 's' to 2, 0, 1 respectively.
     # Using a dictionary for mapping input characters to numbers is more concise.
     input_to_num = {'p': 0, 's': 1, 'r': 2}
+    # Initialize player_choice_num to None to ensure the loop runs at least once.
     player_choice_num = None # Initialize with an invalid value
     while player_choice_num is None:
         player_input = input("Enter R for rock, P for paper or S for scissors: ").strip().lower()
@@ -40,6 +46,7 @@ def play_rock_paper_scissors():
         if player_choice_num is None: # If input_to_num.get() returned None, it was an invalid input
             print("Invalid entry. Please enter R, P, or S.")
 
+    # Convert numerical choices back to descriptive strings for display.
     player_call = PLAYS[player_choice_num]
     computer_call = PLAYS[computer_choice_num]
 
@@ -58,6 +65,7 @@ def play_rock_paper_scissors():
     # when dealing with negative differences (e.g., 0 - 2 = -2, but -2 % 3 = 1 in Python).
     outcome = (player_choice_num - computer_choice_num + 3) % 3
 
+    # Determine and print the winner based on the outcome.
     if outcome == 0:
         print("It's a tie!")
     elif outcome == 1:

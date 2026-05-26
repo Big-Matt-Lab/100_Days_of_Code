@@ -8,6 +8,8 @@ Python concepts highlighted:
 - Control flow with 'if/elif/else' statements
 - Augmented assignment operators ('+=')
 - F-string formatting to display floats as currency
+# Python concepts highlighted (additional):
+# - Basic arithmetic operations
 """
 
 print("Welcome to the Python Pizza Delivery Company")
@@ -21,17 +23,22 @@ extra_cheese  = input("Would you like extra cheese on your pizza? Y or N: ").str
 cost = 0
 if size == 's':
     cost += 15
+    # Small pizza base price
 elif size == 'm':
     cost += 20
+    # Medium pizza base price
 else:
     cost += 25
+    # Large pizza base price
 
 # Add additional costs for pepperoni depending on pizza size
 if pepperoni == 'y':
     if size == 's':
         cost += 2
+        # Small pizza pepperoni cost
     else:
         cost += 3
+        # Medium/Large pizza pepperoni cost
 
 # Add additional cost for extra cheese (flat rate regardless of size)
 if extra_cheese == 'y':
