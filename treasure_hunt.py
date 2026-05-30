@@ -1,12 +1,11 @@
 # By Matt Lab
 """Udemy 100 Days of Code: Treasure Island
-
 A text-based adventure game where the user makes choices to find the hidden treasure.
 
 Python concepts highlighted:
-- The 'sys' module for exiting the program early ('sys.exit()')
-- Multiline strings ('\"\"\"') for displaying long menus
-- Input sanitization ('strip()', 'lower()')
+- The `sys` module for exiting the program early (`sys.exit()`)
+- Multiline strings (`\"\"\"`) for displaying long menus
+- Input sanitization (`strip()`, `lower()`)
 - Sequential logic and guard clauses to keep code flat (avoiding deep nesting)
 """
 # Python concepts highlighted (additional):
@@ -24,12 +23,14 @@ print("Follow your instincts and maybe, just maybe, you will find the treasure!"
 print("\n")
 
 # First checkpoint: Beach or Jungle
+# Python concept: Multiline string for displaying a menu.
 print("You've landed on a beach and need to move - which way to go?")
 print("""A - Stay on the beach and move around the island or
       B - Head into the jungle.""")
 # Get user input for the first choice and sanitize it.
+# Python concept: Chaining string methods `strip()` and `lower()` for input sanitization.
 move_1 = input("A - Beach or B - Jungle: ").strip().lower()
-if move_1 != 'a':
+if move_1 != 'a': # Python concept: A "guard clause" to exit early on a wrong choice.
     print("You've made a poor decision. You've fallen into a hole.")
     print("Game over!")
     sys.exit()
@@ -41,7 +42,7 @@ print("Uh oh, a stone jetty blocks your path. There is an old boat on the beach.
 print("A - Take the boat and row around the jetty or B - move inland?")
 # Get user input for the second choice and sanitize it.
 move_2 = input("A - Boat or B - Inland?: ").strip().lower()
-if move_2 != 'b':
+if move_2 != 'b': # Python concept: Another guard clause.
     print("You've made a poor decision. The boat is leaking and sinking quickly.")
     print("Game over!")
     sys.exit()
@@ -54,20 +55,23 @@ print("Choose which door to pass through.")
 print("The doors are red, blue and green.")
 # Get user input for the third choice and sanitize it.
 print("Choose R for the Red door, B for the blue door and G for the green door.")
+# Python concept: `if/elif/else` chain to handle multiple outcomes from one choice.
 move_3 = input("R - Red or B - Blue or G - Green?: ").strip().lower()
 if move_3 == 'b':
     print("Hooray, you've found the treasure!")
     print("You've won!")
+    # Python concept: `sys.exit()` terminates the program.
     sys.exit()
 if move_3 == 'r':
     print("A bad decision. There is a roaring fire and you've been burned.")
     print("Game over!")
     sys.exit()
 elif move_3 == 'g':
-    print("Ferocious beasts were just beyond the door. Ouch")
+    print("Ferocious beasts were just beyond the door. Ouch.")
     print("Game over!")
     sys.exit()
 else:
+    # Python concept: `else` block as a catch-all for invalid input.
     print("Oops, that was incorrect")
     print("This isn't going to end well for you")
     print("Game over!")
