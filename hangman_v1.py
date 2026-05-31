@@ -35,6 +35,13 @@ new_word_list = [word for word in word_list if len(word) > 3]
 chosen_word = random.choice(new_word_list)
 word_length = len(chosen_word)
 
+# In lieu of ASCII art, we will present a series of messages as lives are lost
+# demonstrating string retrieval from a list base on index
+lives_lost_messages = [
+    'That was your last try', 'Be careful, only one life left',
+    'The end is near', 'Not looking good, three lives left',
+    'Another life gone', 'That will cost you one life']
+
 # Python concept: List multiplication to create a list with repeated elements.
 display = ['_'] * word_length
 # Python concept: F-strings for easy embedding of variables in strings.
@@ -43,7 +50,7 @@ print(f"Welcome to Hangman! Your word has {word_length} letters.")
 print(f"{' '.join(display)}")
 
 game_over = False
-lives = 5
+lives = 6
 # Python concept: A `set` is used to store guessed letters. Sets are highly efficient
 # for checking if an item is present and automatically handle duplicates.
 guessed_letters = set()
@@ -79,7 +86,7 @@ while not game_over:
     # Python concept: Augmented assignment operator `-=` to decrement lives.
     if guess not in chosen_word:
         lives -= 1
-        print(f"'{guess}' is not in the word. You lose a life. {lives} lives left.")
+        print(f"'{guess}' is not in the word. {lives_lost_messages[lives]}")
 
     print(f"{' '.join(display)}")
     # Python concept: `sorted()` returns a new sorted list from an iterable.
@@ -89,8 +96,7 @@ while not game_over:
     if "_" not in display:
         game_over = True
         print("You won!")
-    
-    # Python concept: `elif` to check a condition only if the previous `if` was false.
+    # Check if the player has lost.
     elif lives == 0:
         game_over = True
         print("You lost!")
