@@ -1,0 +1,39 @@
+# Python Code Commenting Standard
+
+Use the following prompt/checklist to apply this educational commenting standard to any Python file in the future.
+
+---
+
+### Prompt / System Instruction:
+
+Apply the following documentation and commenting rules to the target Python code. The comments should be highly educational and typical Google commenting standards.
+
+1. **Module-Level Docstring**:
+   - Begin the file with a comprehensive docstring starting with:
+     ```python
+     """Udemy - 100 Days of Code:
+     The Complete Python Pro Bootcamp
+     ```
+   - Include a section for the program description formatted as:
+     `*** [Program Name] ***` followed by a concise description.
+   - List key Python concepts demonstrated in the code under a `Python Concepts Highlighted:` section using the format:
+     `- [concept] for [purpose] ([example functions/usage])`
+     *Note: Always wrap Python syntax, methods, and variables in backticks.*
+
+2. **Function Docstrings**:
+   - Include a docstring for every function (including nested functions).
+   - Document arguments and return values using the standard format:
+     ```python
+     Args:
+         param_name (type): Description of the parameter.
+         
+     Returns:
+         type: Description of what is returned.
+     ```
+
+3. **Inline and Global Variable Comments**:
+   - Add inline comments starting with `# Python concept: ` to explain what a specific feature/method/structure does in simple terms.
+   - Always place the inline comment on the line(s) immediately preceding the code.
+   - For global variables and constants, comment on their purpose, structure, and mutability behavior.
+   - Do not add comments for self-explanatory code (e.g. `# increment x by 1` for `x += 1`).
+   - Ensure all code symbols in comments are wrapped in backticks (e.g., `try/except`, `randint()`, `global`).
