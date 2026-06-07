@@ -1,18 +1,31 @@
-"""Udemy - 100 Days of Code: The Complete Python Pro Bootcamp
-*** Quiz Project ***
-Defines the `Question` class to represent a single quiz question.
-- `Classes` for blueprinting the structure of quiz items.
-- `Object Attributes` for storing `text` and `answer` data.
+"""Udemy 100 Days of Code: Quiz Question Model
+This module defines the Question class, which serves as the blueprint for 
+each question in the quiz game.
+
+Python concepts highlighted:
+- Class definitions and object-oriented programming
+- Constructor method (__init__)
+- Attribute initialization
 """
 
 class Question:
-    """Models a single quiz question with text and answer."""
+    """
+    A class to represent a quiz question.
+
+    Attributes:
+        text (str): The text of the question.
+        answer (str): The correct answer to the question.
+    """
 
     def __init__(self, q_text, q_answer):
-        """Initializes a `Question` object.
-        Arguments:
-        q_text: The text content of the question.
-        q_answer: The correct answer for the question.
         """
+        Initializes the question with text and answer.
+
+        Args:
+            q_text (str): The text of the question.
+            q_answer (str): The correct answer.
+        """
+        # Python concepts highlighted: Attribute initialization
+        # Assigning the passed arguments to the instance attributes
         self.text = q_text
         self.answer = q_answer
