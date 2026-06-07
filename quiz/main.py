@@ -15,16 +15,18 @@ from question_model import Question
 from quiz_brain import QuizBrain
 import random
 
+
 # Python concepts highlighted: List comprehension and object creation
 # Creating a list of Question objects from the raw dictionary data
-question_bank = []
-for question in question_data:
-    question_text = question["text"]
-    question_answer = question["answer"]
-    new_question = Question(question_text, question_answer)
-    question_bank.append(new_question)
+# question_bank = []
+# for question in question_data:
+#     question_text = question["question"]
+#     question_answer = question["correct_answer"]
+#     new_question = Question(question_text, question_answer)
+#     question_bank.append(new_question)
 
-question_set = random.sample(question_bank, 5)
+number_of_questions = 5
+question_set = random.sample(question_data, number_of_questions)
 
 # Python concepts highlighted: Object instantiation
 # Initializing the QuizBrain with the prepared list of questions
