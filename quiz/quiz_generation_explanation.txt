@@ -1,0 +1,29 @@
+Program Progression Analysis:
+
+1. Data Modeling (data.py & question_model.py):
+   - The raw data is stored in 'data.py' as a list of dictionaries, each 
+        containing a question 'text' and its 'answer'.
+   - 'question_model.py' defines the 'Question' class, which provides a
+        structure for these questions, initializing each object with
+        'text' and 'answer' attributes.
+
+2. Logic Processing (quiz_brain.py):
+   - The 'QuizBrain' class handles the core quiz mechanics.
+   - It maintains the 'question_list', tracks the 'question_number' and
+        the user's 'score'.
+   - Methods like 'still_has_questions()' check if the quiz should continue,
+        while 'next_question()' retrieves the current question, prompts
+        the user, and triggers 'check_answer()' to validate the user's 
+        input against the correct answer and update the score.
+
+3. Execution Flow (main.py):
+   - 'main.py' serves as the entry point. It begins by iterating through
+        the raw 'question_data', creating 'Question' objects and adding 
+        them to a 'question_bank'.
+   - A random sample of questions is then selected to form the
+        'question_set'.
+   - A 'QuizBrain' instance is initialized with this set.
+   - The main game loop runs using a 'while' loop that calls 
+        'quiz.still_has_questions()'. Inside the loop, it repeatedly 
+        calls 'quiz.next_question()' until all questions in the set have
+        been answered.
