@@ -1,1 +1,9 @@
+# IDE settings
 .idea/
+
+# Python clutter
+__pycache__
+*.pyc
+
+# Material Downloads
+*.zip
