@@ -13,6 +13,7 @@ Python concepts highlighted:
 from data import question_data
 from question_model import Question
 from quiz_brain import QuizBrain
+import random
 
 # Python concepts highlighted: List comprehension and object creation
 # Creating a list of Question objects from the raw dictionary data
@@ -23,9 +24,11 @@ for question in question_data:
     new_question = Question(question_text, question_answer)
     question_bank.append(new_question)
 
+question_set = random.sample(question_bank, 5)
+
 # Python concepts highlighted: Object instantiation
 # Initializing the QuizBrain with the prepared list of questions
-quiz = QuizBrain(question_bank)
+quiz = QuizBrain(question_set)
 
 # Python concepts highlighted: While loops for game flow
 # Run the quiz loop as long as there are questions left
