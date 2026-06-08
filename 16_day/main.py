@@ -8,4 +8,3 @@ for col, rows in my_dict.items():
 table.align = "l"
 
 print(table)
-cd

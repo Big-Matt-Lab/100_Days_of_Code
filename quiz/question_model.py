@@ -1,4 +1,7 @@
 """Udemy 100 Days of Code: Quiz Question Model
+The Complete Python Pro Bootcamp
+
+*** Quiz Question Model ***
 This module defines the Question class, which serves as the blueprint for 
 each question in the quiz game.
 
@@ -24,8 +27,8 @@ class Question:
         Args:
             q_text (str): The text of the question.
             q_answer (str): The correct answer.
-        """
-        # Python concepts highlighted: Attribute initialization
-        # Assigning the passed arguments to the instance attributes
+        """ 
+        # Python concept: Attribute initialization.
+        # Assigning the passed arguments to the instance attributes `self.text` and `self.answer`.
         self.text = q_text
         self.answer = q_answer
