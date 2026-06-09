@@ -1,0 +1,65 @@
+Quiz Module Overview
+=====================
+
+This quiz application is built from four main Python modules in the `quiz` folder.
+It demonstrates object-oriented design, API data fetching, data cleaning, user interaction,
+and a simple game loop.
+
+Files and Responsibilities
+--------------------------
+
+main.py
+  - Entry point for the quiz program.
+  - Prompts the user to choose a category or use any category.
+  - Uses `QuestionFetcher` to retrieve and clean questions from the Open Trivia Database API.
+  - Selects a random set of 5 questions from the fetched data.
+  - Creates `Question` objects for each selected question.
+  - Creates a `QuizBrain` instance and runs the quiz loop until all questions are answered.
+
+question_fetch.py
+  - Defines the `QuestionFetcher` class.
+  - Builds an API request URL for the Open Trivia Database API and optionally includes the chosen category.
+  - Uses `requests.get()` to fetch JSON data and `response.raise_for_status()` to handle errors.
+  - Converts HTML-encoded question text into readable text with `html.unescape()`.
+  - Returns a cleaned list of dictionaries with `text` and `answer` keys.
+
+question_model.py
+  - Defines the `Question` class.
+  - Stores the question text and correct answer.
+  - Acts as a simple data model for each quiz question.
+
+quiz_brain.py
+  - Defines the `QuizBrain` class.
+  - Tracks the current question index, the user's score, and the list of questions.
+  - `still_has_questions()` returns `True` while questions remain.
+  - `next_question()` prompts the user and advances to the next question.
+  - `check_answer()` compares user input to the correct answer, updates the score, and prints feedback.
+
+Key Concepts Illustrated
+------------------------
+
+- Modular design: separating fetching, modeling, game logic, and execution.
+- Classes and object instances for organizing behavior and data.
+- HTTP request handling and JSON parsing.
+- Data cleaning and transformation before use.
+- Random sampling with `random.sample()` to choose unique quiz questions.
+- User input handling using `input()`.
+- Loop control with `while` and question flow management.
+- Case-insensitive comparison to validate answers.
+- Score tracking and user feedback after each question.
+
+How the quiz runs
+------------------
+
+1. The user selects a category or chooses `Any`.
+2. The program fetches 50 easy boolean trivia questions from the API.
+3. Five questions are randomly selected and converted into `Question` objects.
+4. `QuizBrain` repeatedly asks each question with `next_question()`.
+5. `check_answer()` validates the response and updates the score.
+6. When there are no more questions, the game prints the final score.
+
+Note
+----
+
+The current implementation uses a live API call from `question_fetch.py` instead of a local `data.py` file.
+This means the quiz content is dynamic and may change each time the program runs.

@@ -53,7 +53,7 @@ def bill_split(total, how_many=1):
     # and handle illogical splits. If 0 or less, the total is returned,
     # implying no split or an error condition where the original total is relevant.
     if how_many <= 0: # Python concept: Guard clause to prevent division by zero.
-        return total 
+        return total
     # Perform the division to split the bill.
     split = total / how_many
     return split
@@ -122,20 +122,20 @@ if __name__ == '__main__':
     print("Time to pay the tab. Let's sort out tip, split and who pays!")
 
     # Get the total bill amount from the user, ensuring it's a valid float.
-    tab = get_float_input("How much is the bill?: $") 
+    tab = get_float_input("How much is the bill?: $")
 
     diners = [] # Initialize an empty list for diner names.
     # Ask if there were other diners, using a validated yes/no input.
-    solo_response = get_yes_no_input("Did others dine with you (y/n)? ") 
+    solo_response = get_yes_no_input("Did others dine with you (y/n)? ")
     if solo_response == 'y': # If yes, collect diner names.
-        diners = get_diners() 
+        diners = get_diners()
         # If the user said 'y' but then didn't enter any names, adjust the response.
         if not diners: # If the user indicated 'y' but then entered no names, treat it as dining alone.
             print("No diners entered. Assuming you dined alone.")
             solo_response = 'n'
 
     # Get the tip percentage from the user, ensuring it's a valid float and non-negative.
-    percent = get_float_input("How much tip to leave? (e.g., 15, 18, 22): ", min_val=0) 
+    percent = get_float_input("How much tip to leave? (e.g., 15, 18, 22): ", min_val=0)
     if percent > 100: # Provide a warning for unusually high tip percentages, but allow it.
         print("Warning: Tip percentage is very high. Proceeding anyway.")
 
@@ -150,13 +150,13 @@ if __name__ == '__main__':
     print("--------------------")
 
     # Determine further actions based on whether there were other diners.
-    if solo_response == 'n' or not diners: 
+    if solo_response == 'n' or not diners:
         print("You dined alone.")
         # If dining alone, there's no need to split or play roulette.
     else:
         # Scenario for multiple diners.
         divide_response = get_yes_no_input("Will the bill be split (y/n)? ") # Ask if the bill should be split.
-        if divide_response == 'y': 
+        if divide_response == 'y':
             num_of_diners = len(diners) # Get the number of diners from the list.
             if num_of_diners > 0: # Ensure there are actual diners to split with.
                 # Call the bill_split function to calculate individual amounts.
@@ -169,12 +169,12 @@ if __name__ == '__main__':
                 print("No diners were entered, so the bill cannot be split.")
         else:
             # If not splitting, offer to play 'Tab Roulette'.
-            roulette_response = get_yes_no_input("Playing 'Tab Roulette' to decide who pays (y/n)? ") 
-            if roulette_response == 'y': 
+            roulette_response = get_yes_no_input("Playing 'Tab Roulette' to decide who pays (y/n)? ")
+            if roulette_response == 'y':
                 # Call the who_pays function from the imported module.
                 # Python concept: Calling a function from an imported module.
-                payer = pay_the_tab_roulette.who_pays(diners) 
-                print(f"Let's see who pays the tab!")
+                payer = pay_the_tab_roulette.who_pays(diners)
+                print("Let's see who pays the tab!")
                 print(f"{payer.title()} pays the tab today!")
             else:
                 print("No one is playing tab roulette.")

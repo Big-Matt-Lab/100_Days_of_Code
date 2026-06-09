@@ -48,7 +48,7 @@ class QuestionFetcher:
         self.category_id = category_id
         # Python concept: Instance attribute `self.base_url` storing the API endpoint.
         # This is a constant part of the URL for fetching 50 easy boolean questions.
-        self.base_url = "https://opentdb.com/api.php?amount=50&difficulty=easy&type=boolean"
+        self.base_url = "https://opentdb.com/api.php?amount=10&difficulty=easy&type=boolean"
 
     def fetch_and_clean_data(self):
         """

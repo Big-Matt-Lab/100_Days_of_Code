@@ -1,0 +1,21 @@
+1. File-Level Header: Start with a multi-line docstring containing:
+
+    A clear project title and purpose.
+
+    A brief description of what the script does.
+
+    A 'Python concepts highlighted' section, listing technical features (e.g., function modularity, try-except blocks, string manipulation).
+
+2. Function/Method Docstrings: Use the Google/NumPy style format. Include:
+
+    A concise description of the function's purpose.
+
+    Args: Clearly define each parameter, including its type (e.g., tab (float)).
+
+    Returns: Describe the return type and value.
+
+3. Educational In-line Comments: >    - Do not state the obvious (e.g., don't write # add 1 to x for x += 1).
+
+    Explain the purpose or the specific Python feature being used (e.g., # Python concept: Using a slice to reverse the list).
+
+4. Tone: Maintain an educational, encouraging tone suitable for a student of programming.

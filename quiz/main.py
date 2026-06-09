@@ -19,6 +19,7 @@ Python concepts highlighted:
 """
 
 # Python concept: Importing custom modules and classes.
+from prettytable import PrettyTable
 from question_fetch import QuestionFetcher
 from question_model import Question
 from quiz_brain import QuizBrain
@@ -26,17 +27,86 @@ from quiz_brain import QuizBrain
 import random
 
 
+# 10 books, 11 film, 12 music, 13 theater, tv, 15 video games, 16 board games
+# 17 nature, computers, math, 20 mythology, sports geography, history
+# 24 politics, art, celebrities, 27 animals, vehciles, comics
+# 30 gadgets, anime, animation
+
 # Python concept: Global variable `selected_category` to store the user's category choice.
 # Its value is `None` if the user chooses "Any", otherwise it's an integer ID.
 selected_category = None
 
-print("Choose a category:\n0: Any\n9: General Knowledge\n21: Sports")
-# Python concept: `input()` to get user input.
-choice = input("Choice: ")
-# Python concept: Conditional expression to set `selected_category` based on user input.
-# `int()` is used for type conversion if a specific category is chosen.
-if choice != "0":
-    selected_category = int(choice)
+# Present a numbered menu for the user where `1` is the default (Any/all).
+print("Choose a category:")
+print(" 1: Any (default)")
+print(" 2: General Knowledge")
+print(" 3: Books")
+print(" 4: Film")
+print(" 5: Music")
+print(" 6: Musicals & Theatres")
+print(" 7: Television")
+print(" 8: Video Games")
+print(" 9: Board Games")
+print("10: Science & Nature")
+print("11: Computers")
+print("12: Mathematics")
+print("13: Mythology")
+print("14: Sports")
+print("15: Geography")
+print("16: History")
+print("17: Politics")
+print("18: Art")
+print("19: Celebrities")
+print("20: Animals")
+print("21: Vehicles")
+print("22: Comics")
+print("23: Gadgets")
+print("24: Anime & Manga")
+print("25: Cartoon & Animations")
+
+# Map the user's numbered choice to the API category ID values.
+# API: 0 = Any, 9 = General Knowledge, 10 = Books, 11 = Film, ...
+user_to_api = {
+    "1": 0,
+    "2": 9,
+    "3": 10,
+    "4": 11,
+    "5": 12,
+    "6": 13,
+    "7": 14,
+    "8": 15,
+    "9": 16,
+    "10": 17,
+    "11": 18,
+    "12": 19,
+    "13": 20,
+    "14": 21,
+    "15": 22,
+    "16": 23,
+    "17": 24,
+    "18": 25,
+    "19": 26,
+    "20": 27,
+    "21": 28,
+    "22": 29,
+    "23": 30,
+    "24": 31,
+    "25": 32,
+}
+
+# Python concept: `input()` to get user input. Default to "1" if empty.
+choice = input("Choice (1-25): ") or "1"
+
+# Resolve the selected API category id. If an unexpected value is entered,
+# attempt to convert it to an integer and use that directly.
+if choice in user_to_api:
+    selected_category = user_to_api[choice]
+else:
+    try:
+        selected_category = int(choice)
+    except ValueError:
+        # Fallback to default (Any)
+        selected_category = 0
 
 # Python concept: Object-Oriented Programming (OOP) - creating an instance of `QuestionFetcher`.
 # The `fetcher` object is responsible for retrieving and cleaning question data.
