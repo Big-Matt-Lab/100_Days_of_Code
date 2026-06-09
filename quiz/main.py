@@ -19,7 +19,6 @@ Python concepts highlighted:
 """
 
 # Python concept: Importing custom modules and classes.
-from prettytable import PrettyTable
 from question_fetch import QuestionFetcher
 from question_model import Question
 from quiz_brain import QuizBrain
