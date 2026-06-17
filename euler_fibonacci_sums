@@ -1,16 +1,16 @@
-# # sum of even fibonacci numbers while sequence < 4,000,000
-# x, y = 1, 2
-# sum = 2
-# next = 0
-# # 1, 2, 3, 5, 8, 13, 21, 34
-# while next < 4000000:
-#     next =  x + y
-#     if next % 2 == 0:
-#         sum += next
-#     x = y
-#     y = next
-#     # print(next)
-# print(sum)
+# sum of even fibonacci numbers while sequence < 4,000,000
+x, y = 1, 1
+
+count = 2
+
+# 1, 2, 3, 5, 8, 13, 21, 34
+while len(str(y)) < 1000:
+    x, y = y, x + y
+    count += 1
+    # print(next)
+print(count)
+print(len(str(y)))
+
 
 ######
 # Find the difference between the sum of the squares of the first one hundred natural numbers and the square of the sum.
@@ -26,35 +26,50 @@
 import time
 
 # Use a dictionary as our "flight data recorder"
-memo = {1: 1}
+# memo = {1: 1}
 
-def get_collatz_length(n):
-    # If we've seen this number, return the stored length immediately
-    if n in memo:
-        return memo[n]
+# def get_collatz_length(n):
+#     # If we've seen this number, return the stored length immediately
+#     if n in memo:
+#         return memo[n]
     
-    # Otherwise, calculate it and store it
-    if n % 2 == 0:
-        length = 1 + get_collatz_length(n // 2)
-    else:
-        length = 1 + get_collatz_length(3 * n + 1)
+#     # Otherwise, calculate it and store it
+#     if n % 2 == 0:
+#         length = 1 + get_collatz_length(n // 2)
+#     else:
+#         length = 1 + get_collatz_length(3 * n + 1)
         
-    memo[n] = length
-    return length
+#     memo[n] = length
+#     return length
 
-start_time = time.perf_counter()
+# start_time = time.perf_counter()
 
-max_chain = 0
-starting_num = 0
+# max_chain = 0
+# starting_num = 0
 
-# Check every number up to 1,000,000
-for i in range(1, 1000001):
-    length = get_collatz_length(i)
-    if length > max_chain:
-        max_chain = length
-        starting_num = i
+# # Check every number up to 1,000,000
+# for i in range(1, 1000001):
+#     length = get_collatz_length(i)
+#     if length > max_chain:
+#         max_chain = length
+#         starting_num = i
 
-end_time = time.perf_counter()
+# end_time = time.perf_counter()
 
-print(f"The number with the longest chain is {starting_num}")
-print(f"Time taken: {end_time - start_time:.6f} seconds")
+# print(f"The number with the longest chain is {starting_num}")
+# print(f"Time taken: {end_time - start_time:.6f} seconds")
+# The logic for solving the 1001x1001 spiral diagonal sum
+# Sum = 1 + sum of corners for each layer
+# Corner values for side length n: 
+# n^2, n^2 - (n-1), n^2 - 2(n-1), n^2 - 3(n-1)
+# Simplified: 4n^2 - 6n + 6
+
+def spiral_diagonal_sum(size):
+    total_sum = 1
+    # We step by 2 to hit only odd side lengths (3, 5, 7...)
+    for n in range(3, size + 1, 2):
+        total_sum += (4 * n**2 - 6 * n + 6)
+    return total_sum
+
+result = spiral_diagonal_sum(1001)
+print(f"The sum of the diagonals for a 1001x1001 spiral is: {result}")
