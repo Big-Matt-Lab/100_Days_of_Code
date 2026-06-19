@@ -7,3 +7,5 @@ __pycache__
 
 # Material Downloads
 *.zip
+
+.env

@@ -14,7 +14,7 @@ Python concepts highlighted:
 - `if __name__ == '__main__':` block for script execution
 """
 
-import pay_the_tab_roulette # Import the module
+import early_work.pay_the_tab_roulette as pay_the_tab_roulette # Import the module
 
 def tip_calc(tab, tip_percent):
     """
