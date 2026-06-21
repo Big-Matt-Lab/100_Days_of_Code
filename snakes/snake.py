@@ -56,6 +56,12 @@ class Snake:
             s.goto(position)
             s.speed(2)
             self.segments.append(s)
+    
+    def reset_snake(self):
+        self.segments.clear()
+        self.create_snake()
+        self.head = self.segments[0]
+
 
     def move(self):
         """Move the snake forward by shifting each segment.

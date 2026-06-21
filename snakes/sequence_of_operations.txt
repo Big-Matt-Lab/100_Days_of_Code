@@ -1,0 +1,37 @@
+Sequence of Operations in the Snake Game:
+
+The `main.py` script orchestrates the game by setting up the environment, initializing game objects, and 
+running the main game loop. Within this loop, the `snake` object's movement is continuously updated, 
+and interactions with `food` and `scoreboard` are managed. The `food.py` and `scoreboard.py` modules provide 
+specialized functionalities for their respective game elements, 
+while `snake.py` defines the core behavior and appearance of the snake.
+
+1.  **main.py**: This is the entry point of the game. It initializes the game screen, creates instances of `Scoreboard`, `Snake`, and `Food` objects. It then sets up event listeners for keyboard inputs to control the snake's movement and to quit the game.
+
+2.  **Snake Game Loop (main.py)**: The `while game_is_on` loop continuously updates the game state:
+    *   `screen.update()` and `time.sleep(.1)`: Refreshes the screen and pauses briefly to control the animation speed.
+    *   `snake.move()`: Calls the `move` method in the `snake.py` module to update the position of the snake's segments.
+    *   `snake.border_crossing()`: Checks if the snake has hit the screen borders and, if so, adjusts its position and changes its direction randomly.
+    *   **Food Interaction**: If the snake's head is close to the `food` object (`snake.head.distance(food) < 20`):
+        *   `food.refresh()`: The `food` object (from `food.py`) is moved to a new random location.
+        *   `scoreboard.increase_score()`: The `scoreboard` object (from `scoreboard.py`) updates and displays the increased score.
+
+3.  **food.py**: Defines the `Food` class, which inherits from `Turtle`. It handles:
+    *   Initialization: Sets the food's shape, color, and initial random position.
+    *   `refresh()`: Moves the food to a new random `(x, y)` coordinate on the screen after it's eaten.
+
+4.  **scoreboard.py**: Defines the `Scoreboard` class, also inheriting from `Turtle`. It manages:
+    *   Initialization: Sets up the score display at the top of the screen with an initial score of 0.
+    *   `increase_score()`: Increments the score, clears the previous display, and rewrites the updated score on the screen.
+    *   `game_over()`: Displays a 'GAME OVER' message when the game ends.
+
+5.  **snake.py**: Defines the `Snake` class, which is composed of multiple `Turtle` objects as segments. It handles:
+    *   Initialization: Creates the initial snake body and sets the head segment.
+    *   `create_snake()`: Builds the snake by creating and positioning `Turtle` segments.
+    *   `move()`: Moves the snake forward by iterating through its segments and updating their positions.
+    *   `up()`, `down()`, `left()`, `right()`: Methods to change the snake head's direction based on keyboard input, preventing immediate reverse movement.
+    *   `border_crossing()`: Detects if the snake hits the screen boundaries and, if so, repositions it and changes its direction randomly to keep it on screen.
+
+**Overall Flow**:
+
+The `main.py` script orchestrates the game by setting up the environment, initializing game objects, and running the main game loop. Within this loop, the `snake` object's movement is continuously updated, and interactions with `food` and `scoreboard` are managed. The `food.py` and `scoreboard.py` modules provide specialized functionalities for their respective game elements, while `snake.py` defines the core behavior and appearance of the snake.

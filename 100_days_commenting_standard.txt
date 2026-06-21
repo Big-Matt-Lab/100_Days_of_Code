@@ -32,7 +32,8 @@ Apply the following documentation and commenting rules to the target Python code
      ```
 
 3. **Inline and Global Variable Comments**:
-   - Add inline comments starting with `# Python concept: ` to explain what a specific feature/method/structure does in simple terms.
+   - Add inline comments to explain what a specific feature/method/structure does in simple terms.
+   - Avoid redundancy.
    - Always place the inline comment on the line(s) immediately preceding the code.
    - For global variables and constants, comment on their purpose, structure, and mutability behavior.
    - Do not add comments for self-explanatory code (e.g. `# increment x by 1` for `x += 1`).
