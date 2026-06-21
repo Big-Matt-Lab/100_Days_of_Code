@@ -11,6 +11,10 @@ Python Concepts Highlighted:
 """
 
 from turtle import Turtle
+ALIGNMENT = "center"
+FONT = ("Arial", 24, "normal")
+
+
 
 class Scoreboard(Turtle):
     """Displays the score and final game-over message."""
@@ -27,40 +31,43 @@ class Scoreboard(Turtle):
         # Attributes - standards of the object
         super().__init__()
         self.score = 0
-        self.high_score = 0
+        self.high_score = self.load_high_score()
         self.penup()
         self.color("white")
         self.goto(0, 260)
         self.hideturtle()
-        self.write(f"Score: {self.score}", move=False, align="center", font=("Arial", 24, "normal"))
+        self.update_scoreboard()
+
+
     # Methods - Actions of the object
-    def increase_score(self):
-        """Increment the score and refresh the on-screen text.
-
-        Args:
-            None
-
-        Returns:
-            None: Updates the score display with the new value.
-        """
-        self.score += 1
-        self.clear()
-        self.goto(0, 260)
-        self.write(f"Score: {self.score}", move=False, align="center", font=("Arial", 24, "normal"))
 
     def update_scoreboard(self):
+        self.clear()
+        self.goto(0, 260)
         self.write(f"Score: {self.score} High Score: {self.high_score}", align=ALIGNMENT, font=FONT)
 
     def reset(self):
         if self.score > self.high_score:
             self.high_score = self.score
+            with open("data.txt", "w") as data_file:
+                data_file.write(str(self.high_score))
         self.score = 0
         self.update_scoreboard()
 
-    # def game_over(self):
-    #     self.goto(0, 0)
-    #     self.write("GAME OVER", align=ALIGNMENT, font=FONT)
+    def game_over(self):
+        self.goto(0, 0)
+        self.write("GAME OVER", align=ALIGNMENT, font=FONT)
 
     def increase_score(self):
         self.score += 1
         self.update_scoreboard()
+
+    def load_high_score(self):
+        try:
+            with open("data.txt", mode="r") as file:
+                high_score = file.read()
+                return int(high_score)
+        except FileNotFoundError:
+            return 0
+
+
