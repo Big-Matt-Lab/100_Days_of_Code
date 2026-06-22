@@ -54,8 +54,8 @@ class Food(Turtle):
             None: Repositions the food using the `goto()` method.
         """
         # Python concept: Use `random.randint()` to generate random integer coordinates.
-        random_x = random.randint(-280, 280) # Python concept: Generate a random X coordinate within game bounds.
-        random_y = random.randint(-280, 280) # Python concept: Generate a random Y coordinate within game bounds.
+        random_x = random.randint(-265, 265) # Python concept: Generate a random X coordinate within game bounds.
+        random_y = random.randint(-265, 265) # Python concept: Generate a random Y coordinate within game bounds.
         self.goto(random_x, random_y) # Python concept: Move the food Turtle to the new random coordinates.
 
 
