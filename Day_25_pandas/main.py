@@ -1,52 +1,40 @@
-# with open("weather_data.csv") as weather_data:
-#     weather = weather_data.readlines()
-# print(weather)
+"""Udemy - 100 Days of Code:
+The Complete Python Pro Bootcamp
 
-# import csv
+*** Analyzing Squirrel Census Data with Pandas ***
+This script demonstrates how to use the `pandas` library to analyze squirrel census data.
+It reads a CSV file containing information about squirrels, calculates the counts of squirrels
+for different primary fur colors, and then saves these counts into a new CSV file.
 
-# with open("weather_data.csv") as data_file:
-#     data = csv.reader(data_file)
-#     temperatures = []
-#     for row in data:
-#         if int(row[1].isnumeric()):
-#             temperatures.append(int(row[1]))
-#         print(temperatures)
+Python Concepts Highlighted:
+- `pandas` library for data manipulation (`pd.read_csv`, `DataFrame`, `Series`, filtering, `to_csv`)
+- Reading and writing CSV files.
+- Data filtering and aggregation (`==`, `.sum()`)
+- Dictionary creation and conversion to `DataFrame`.
+- Basic data analysis to count occurrences of categorical data.
+"""
 
 import pandas as pd
 
-
-# data = pd.read_csv("weather_data.csv")
-
-# # temp_list = data['temp'].to_list()
-# # temp_items = len(temp_list)
-# # avg_temp = sum(temp_list) / temp_items
-# # print(f"The average temperature was {avg_temp:.1f} C.")
-# # print(f"The high temperature was {data['temp'].max()} C.")
-# monday = data[data.day == 'Monday']
-# monday_temp = monday.temp[0]
-# temp_in_F = monday_temp * 9 / 5 + 32
-# print(f"Mondays temperature was {temp_in_F} F.")
-
-# data_dict = {
-#     "students": ["Amy", "James", "Angela"],
-#     "scores": [76, 56, 65]
-# }
-
-# data = pd.DataFrame(data_dict)
-# print(data.students[0])
-
+# Read the squirrel data from the `squirrel_data.csv` file into a pandas DataFrame.
 data = pd.read_csv("squirrel_data.csv")
 
-
+# Calculate the number of squirrels for each primary fur color.
+# This is done by filtering the 'Primary Fur Color' column for each color
+# and then using `.sum()` on the resulting boolean Series to count `True` values.
 gray_count = (data["Primary Fur Color"] == "Gray").sum()
 black_count = (data["Primary Fur Color"] == "Black").sum()
 cinnamon_count = (data["Primary Fur Color"] == "Cinnamon").sum()
 
+# Create a dictionary to hold the fur colors and their corresponding counts.
+# This dictionary will be used to create a new DataFrame.
 fur_color_dict = {
     'fur colors': ['gray', 'black', 'cinnamon'],
     'counts': [gray_count, black_count, cinnamon_count]
-    }
+}
 
+# Create a new pandas DataFrame from the `fur_color_dict`.
 color_count = pd.DataFrame(fur_color_dict)
-color_count.to_csv("squirrel_colors.csv",index = False)
-
+# Save the `color_count` DataFrame to a new CSV file named `squirrel_colors.csv`.
+# `index=False` prevents `pandas` from writing the DataFrame index as a column in the CSV.
+color_count.to_csv("squirrel_colors.csv", index=False)
