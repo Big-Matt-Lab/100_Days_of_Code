@@ -74,10 +74,7 @@ while len(guessed_states) < 50:
         time.sleep(1)
 
 # Convert the list of all states into a pandas Series for easier set operations.
-all_states_series = pd.Series(all_states)
-# Identify states that were in `all_states` but not in `guessed_states`.
-# This uses boolean indexing with `isin()` and negation `~`.
-missing_states = all_states_series[~all_states_series.isin(guessed_states)]
+missing_states = pd.DataFrame([state for state in all_states if state not in guessed_states])
 
 # Save the identified missing states to a new CSV file named `states_to_learn.csv`.
 # `index=False` prevents writing the DataFrame index as a column.
