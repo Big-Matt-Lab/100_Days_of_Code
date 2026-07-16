@@ -1,35 +1,19 @@
-"""Docstring Here"""
 
-import tkinter as tk
-
-window = tk.Tk()
-window.title("My irst GUI program")
-window.minsize(width=500, height=300)
-
-# Label
-
-my_label = tk.Label(text="New Text", font=("Arial", 24, "bold"))
-my_label.pack()
-
-
-# my_label.config(text="New Text")
-
-# Button
-
-def button_clicked():
-    """Docstring Here"""
-    new_text = entry.get()
-    my_label["text"] = new_text
-
-button = tk.Button(text="Click Me", command=button_clicked)
-button.pack()
-
-# Entry
-entry = tk.Entry(width=10)
-entry.pack()
-
-
-
-
-
-window.mainloop()
+new_lines = [
+    "text",
+    "another line of text",
+    "one more text line",
+    "yet another line of text"
+    ]
+try:
+    with open("text_file.txt", 'r') as file:
+        lines =file.readlines()
+except FileNotFoundError:
+    print("file not found, creating file")
+    with open("text_file.txt", 'a', encoding="UTF-8") as new_file:
+        for line in new_lines:
+            new_file.write(line + "\n")
+else:
+    print(lines)
+finally:
+    print("End this exercise")
