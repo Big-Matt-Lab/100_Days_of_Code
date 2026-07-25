@@ -109,7 +109,7 @@ else:
 
 # Python concept: Object-Oriented Programming (OOP) - creating an instance of `QuestionFetcher`.
 # The `fetcher` object is responsible for retrieving and cleaning question data.
-fetcher = QuestionFetcher(category_id=selected_category)
+fetcher = QuestionFetcher(category=selected_category)
 # Python concept: Calling an instance method `fetch_and_clean_data()` to get data.
 raw_question_data = fetcher.fetch_and_clean_data()
 

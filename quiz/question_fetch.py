@@ -36,7 +36,7 @@ class QuestionFetcher:
         base_url (str): The base URL for the Open Trivia Database API.
     """
 
-    def __init__(self, category_id=None):
+    def __init__(self, category=None):
         """
         Initializes the QuestionFetcher with an optional category ID.
 
@@ -45,10 +45,12 @@ class QuestionFetcher:
                                          Defaults to `None` for any category.
         """
         # Python concept: Instance attribute `self.category_id` to store the category configuration.
-        self.category_id = category_id
+        
+        
         # Python concept: Instance attribute `self.base_url` storing the API endpoint.
         # This is a constant part of the URL for fetching 50 easy boolean questions.
-        self.base_url = "https://opentdb.com/api.php?amount=10&difficulty=easy&type=boolean"
+        self.category_id = category
+        self.url = "https://opentdb.com/api.php"
 
     def fetch_and_clean_data(self):
         """
@@ -59,14 +61,20 @@ class QuestionFetcher:
             list[dict]: A list of dictionaries, where each dictionary has
                         "text" (str) and "answer" (str) keys.
         """
-        # Python concept: Building a dynamic URL using f-strings.
-        url = self.base_url
-        # Python concept: Conditional logic to append category parameter if `category_id` is provided.
-        if self.category_id:
-            url += f"&category={self.category_id}"
-            
+
+        parameters = {
+            "amount": 10,
+            "difficulty": "easy",
+            "type": "boolean",
+            }
+        
+        if self.category_id != 0:
+            parameters["category"] = self.category_id
+        
+        
+        
         # Python concept: `requests.get()` to send an HTTP GET request to the API.
-        response = requests.get(url)
+        response = requests.get(self.url, params=parameters, timeout=5)
         # Python concept: `response.raise_for_status()` to check for HTTP errors (e.g., 404, 500).
         response.raise_for_status()
         # Python concept: `response.json()` to parse the JSON response body into a Python dictionary.
