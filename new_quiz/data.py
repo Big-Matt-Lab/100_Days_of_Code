@@ -1,3 +1,17 @@
+"""Udemy - 100 Days of Code:
+The Complete Python Pro Bootcamp
+
+*** Quiz Data Module ***
+This module contains a static dataset of trivia questions, which can be used
+as fallback data or for local offline testing of the quiz application.
+
+Python Concepts Highlighted:
+- `list` of `dict` for storing structured nested data records (`question_data`)
+"""
+
+# Global static dataset containing trivia question structures.
+# Each dictionary represents a question with its metadata, category, question text, and answers.
+# This list is technically mutable but treated as a read-only constant dataset.
 question_data = [
     {
         "category": "Science: Computers",

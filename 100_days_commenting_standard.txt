@@ -1,8 +1,3 @@
-# Python Code Commenting Standard
-
-Use the following prompt/checklist to apply this educational commenting standard to any Python file in the future.
-
----
 
 ### Prompt / System Instruction:
 

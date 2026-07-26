@@ -21,10 +21,10 @@ Python Concepts Highlighted:
 - `html.unescape()` for cleaning HTML entities from question text.
 """
 
-# Python concept: Importing the `requests` library for making HTTP requests.
-import requests
-# Python concept: Importing the `html` module for handling HTML entities.
 import html
+import requests
+
+
 
 class QuestionFetcher:
     """
@@ -44,9 +44,7 @@ class QuestionFetcher:
             category_id (int, optional): The ID of the question category to fetch.
                                          Defaults to `None` for any category.
         """
-        # Python concept: Instance attribute `self.category_id` to store the category configuration.
-        
-        
+        # Python concept: Instance attribute `self.category_id` to store the category configuration
         # Python concept: Instance attribute `self.base_url` storing the API endpoint.
         # This is a constant part of the URL for fetching 50 easy boolean questions.
         self.category_id = category
@@ -67,30 +65,31 @@ class QuestionFetcher:
             "difficulty": "easy",
             "type": "boolean",
             }
-        
+
         if self.category_id != 0:
             parameters["category"] = self.category_id
-        
-        
-        
+
         # Python concept: `requests.get()` to send an HTTP GET request to the API.
         response = requests.get(self.url, params=parameters, timeout=5)
         # Python concept: `response.raise_for_status()` to check for HTTP errors (e.g., 404, 500).
         response.raise_for_status()
-        # Python concept: `response.json()` to parse the JSON response body into a Python dictionary.
+        # Python concept: `response.json()` to parse the JSON response body
+        # into a Python dictionary.
         data = response.json()
-        
+
         # Python concept: Dictionary access to extract the list of question results.
         results = data['results']
-        # Python concept: `cleaned_questions` is a list that will store processed question dictionaries.
+        # Python concept: `cleaned_questions` is a list that will store
+        # processed question dictionaries.
         cleaned_questions = []
         # Python concept: `for` loop to iterate through each raw question item.
         for item in results:
-            # Python concept: `html.unescape()` to convert HTML entities (like `&quot;`) into readable characters.
+            # Python concept: `html.unescape()` to convert HTML entities (like `&quot;`)
+            # into readable characters.
             # Python concept: Dictionary creation to structure the cleaned question data.
             cleaned_questions.append({
                 "text": html.unescape(item["question"]),
                 "answer": item["correct_answer"]
             })
-            
+
         return cleaned_questions
