@@ -1,0 +1,10 @@
+from datetime import datetime, timezone
+
+timestamp = 1785099600
+
+# Convert to a timezone-aware UTC datetime object
+dt_utc = datetime.fromtimestamp(timestamp, timezone.utc)
+
+# Format into a conventional string (YYYY-MM-DD HH:MM:SS)
+formatted_time = dt_utc.strftime('%Y-%m-%d %H:%M:%S %Z')
+print(formatted_time)  # Output: 2026-07-26 21:00:00 UTC

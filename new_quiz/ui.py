@@ -116,4 +116,4 @@ class QuizInterface:
             self.canvas.config(bg="red")
             
         # Python concept: Scheduling non-blocking future function calls using `window.after()`.
-        self.window.after(1000, self.get_next_question)
+        self.window.after(500, self.get_next_question)
