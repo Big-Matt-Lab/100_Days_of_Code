@@ -1,24 +1,7 @@
-
-"""Udemy - 100 Days of Code:
-The Complete Python Pro Bootcamp
-
-*** ISS Overhead Notifier ***
-This program checks if the International Space Station (ISS) is currently overhead
-a specified location and if it's dark enough to see it. It then notifies the user.
-
-Python Concepts Highlighted:
-- `datetime` module for working with dates and times (`datetime.now`)
-- `time` module for pausing program execution (`time.sleep`)
-- `requests` library for making HTTP GET requests to external APIs (`requests.get`, `response.json`)
-- Global constants for user-defined coordinates (`MY_LAT`, `MY_LONG`)
-- Conditional logic for checking ISS proximity and night time (`if/else` statements)
-- Function modularity for breaking down complex tasks (`where_is_iss_now`, `night_time`)
-- API interaction with `api.open-notify.org` for ISS position and 
-  `api.sunrise-sunset.org` for daylight hours.
-"""
-
-from datetime import datetime
+# ... existing code ...
 import time
+from datetime import datetime
+
 import requests
 
 # --- GLOBAL CONSTANTS ---
@@ -26,88 +9,96 @@ import requests
 # These values should be updated to your specific location.
 MY_LAT = 34.694397  # Example: Latitude for Greenville, SC, USA
 # Your geographical longitude. Used to determine if the ISS is overhead.
-MY_LONG = -82.200594 # Example: Longitude for Greenville, SC, USA
+MY_LONG = -82.200594  # Example: Longitude for Greenville, SC, USA
+
+# API Endpoints
+ISS_API_URL = "http://api.open-notify.org/iss-now.json"
+SUNRISE_SUNSET_API_URL = "https://api.sunrise-sunset.org/json"
+
+# Configuration for ISS proximity and check interval
+ISS_PROXIMITY_DEGREES = 5
+CHECK_INTERVAL_SECONDS = 120
 
 
-def where_is_iss_now():
-    """Checks if the International Space Station (ISS) is currently within a 5-degree radius
-    of the predefined `MY_LAT` and `MY_LONG` coordinates.
+def where_is_iss_now(user_latitude: float, user_longitude: float) -> bool:
+    """Checks if the International Space Station (ISS) is currently within a predefined radius
+    of the given user coordinates.
 
     This function makes an API call to `http://api.open-notify.org/iss-now.json` to get the
     current latitude and longitude of the ISS. It then compares these coordinates with the
-    user\'s location.
+    user's location.
 
     Args:
-        None
+        user_latitude (float): The latitude of the user's location.
+        user_longitude (float): The longitude of the user's location.
 
     Returns:
-        bool: `True` if the ISS is within 5 degrees of the user\'s location, `False` otherwise.
+        bool: `True` if the ISS is within `ISS_PROXIMITY_DEGREES` of the user's location, `False` otherwise.
     """
-
-    response = requests.get(url="http://api.open-notify.org/iss-now.json", timeout=5)
+    response = requests.get(url=ISS_API_URL, timeout=5)
     response.raise_for_status()
     data = response.json()
-
     iss_latitude = float(data["iss_position"]["latitude"])
     iss_longitude = float(data["iss_position"]["longitude"])
 
-    #Your position is within +5 or -5 degrees of the ISS position.
-    if (MY_LAT - 5 < iss_latitude < MY_LAT + 5) and (MY_LONG - 5 < iss_longitude < MY_LONG + 5):
-        return True
-    return False
+    # Your position is within +ISS_PROXIMITY_DEGREES or -ISS_PROXIMITY_DEGREES of the ISS position.
+    return (
+        user_latitude - ISS_PROXIMITY_DEGREES
+        < iss_latitude
+        < user_latitude + ISS_PROXIMITY_DEGREES
+    ) and (
+        user_longitude - ISS_PROXIMITY_DEGREES
+        < iss_longitude
+        < user_longitude + ISS_PROXIMITY_DEGREES
+    )
 
 
-def night_time():
-    """Determines if it is currently nighttime at the predefined `MY_LAT` and `MY_LONG` coordinates.
-
+def night_time(user_latitude: float, user_longitude: float) -> bool:
+    """Determines if it is currently nighttime at the given user coordinates.
     This function makes an API call to `https://api.sunrise-sunset.org/json` to get the sunrise
-    and sunset times for the user\'s location. It then compares the current hour with these times
-    to ascertain if it\'s dark.
-
+    and sunset times for the user's location. It then compares the current hour with these times
+    to ascertain if it's dark.
     Args:
-        None
-
+        user_latitude (float): The latitude of the user's location.
+        user_longitude (float): The longitude of the user's location.
     Returns:
         bool: `True` if the current time is after sunset or before sunrise (i.e., nighttime),
               `False` otherwise.
     """
     # Parameters for the sunrise-sunset API request.
     parameters = {
-        "lat": MY_LAT,  # User\'s latitude.
-        "lng": MY_LONG, # User\'s longitude.
-        "formatted": 0, # Request raw (unformatted) time data.
+        "lat": user_latitude,  # User's latitude.
+        "lng": user_longitude,  # User's longitude.
+        "formatted": 0,  # Request raw (unformatted) time data.
     }
-
     # Make a GET request to the sunrise-sunset API with the specified parameters.
-    response = requests.get("https://api.sunrise-sunset.org/json", params=parameters, timeout=5)
+    response = requests.get(SUNRISE_SUNSET_API_URL, params=parameters, timeout=5)
     # Raise an HTTPError for bad responses (4xx or 5xx status codes).
     response.raise_for_status()
     # Parse the JSON response.
     data = response.json()
-
     # Extract sunrise and sunset hours from the response.
     # The time is in ISO 8601 format, so we split to get the hour.
     sunrise = int(data["results"]["sunrise"].split("T")[1].split(":")[0])
     sunset = int(data["results"]["sunset"].split("T")[1].split(":")[0])
-
     # Get the current hour in 24-hour format.
     time_now = datetime.now()
-
     # Check if the current hour falls outside the daylight hours (after sunset or before sunrise).
-    if time_now.hour >= sunset or time_now.hour <= sunrise:
-        return True  # It is nighttime.
-    return False     # It is daytime.
+    return time_now.hour >= sunset or time_now.hour <= sunrise
 
 
 # --- MAIN PROGRAM LOOP ---
 # This loop continuously checks for the ISS position and visibility, pausing between checks.
 while True:
-    # Check if the ISS is overhead AND it is currently nighttime at the user\'s location.
-    if where_is_iss_now() and night_time():
-        print("The ISS is overhead and it is visible!") # Notify user if both conditions are met.
+    # Check if the ISS is overhead AND it is currently nighttime at the user's location.
+    if where_is_iss_now(MY_LAT, MY_LONG) and night_time(MY_LAT, MY_LONG):
+        print(
+            "The ISS is overhead and it is visible!"
+        )  # Notify user if both conditions are met.
     else:
-        print("The ISS is currently not visible.")     # Notify user if the ISS is not visible.
-
-    # Pause the program for 120 seconds (2 minutes) before checking again.
+        print(
+            "The ISS is currently not visible."
+        )  # Notify user if the ISS is not visible.
+    # Pause the program for CHECK_INTERVAL_SECONDS (2 minutes) before checking again.
     # This prevents excessive API calls and reduces resource usage.
-    time.sleep(120)
+    time.sleep(CHECK_INTERVAL_SECONDS)
