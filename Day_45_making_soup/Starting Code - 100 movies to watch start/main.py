@@ -46,7 +46,8 @@ all_movies = soup.find_all(name="h3", class_="title")
 movies = [film.getText() for film in all_movies]
 movies.reverse()
 
-# Iterate through each raw movie string extracted from the HTML.
+# Iterate through each raw movie string extracted from the HTML
+# and write the list to a new file (or amend an existing file)
 with open("movies.txt", mode="w") as file:
     for movie in movies:
         print(f"{movie}")
