@@ -6,24 +6,30 @@ coffee_list = Menu()
 bank = MoneyMachine()
 machine = CoffeeMaker()
 
+
 def main():
     off = False
     while not off:
-        options = coffee_list.get_items()
-        user_choice = input(f"What would you like? ({options}): ").strip().lower()
-        if user_choice == 'report':
+        user_choice = (
+            input(
+                "What would you like? (espresso $1.50, latte $2.50, cappuccino $3.00): "
+            )
+            .strip()
+            .lower()
+        )
+        if user_choice == "report":
             machine.report()
             bank.report()
-        elif user_choice == 'off':
+        elif user_choice == "off" or user_choice not in coffee_list.get_items():
             off = True
         else:
-            drink = coffee_list.find_drink(user_choice)
-            if drink is not None:
-                if machine.is_resource_sufficient(drink):
-                    if bank.make_payment(drink.cost):
-                        machine.make_coffee(drink)
+            order = coffee_list.find_drink(user_choice)
+            print(order)
+            print("Coffee Time!")
+            if machine.is_resource_sufficient(order):
+                if bank.make_payment(order.cost):
+                    machine.make_coffee(order)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
-

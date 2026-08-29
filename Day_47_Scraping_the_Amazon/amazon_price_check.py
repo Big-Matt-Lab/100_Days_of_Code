@@ -8,8 +8,12 @@ data = response.text
 
 # Make soup
 soup = BeautifulSoup(data, "html.parser")
-price = soup.find(name="span",class_="aok-offscreen").get_text()
-print(price)
+price = soup.find(name="div", id="nav-logo")
+banners = [div.find("a") for div in price]
+print(banners)
+article_texts = [banner.getText() for banner in banners]
+article_links = [banner.get("href") for banner in banners]
+print(article_links)
 # price_split = price.split('.')
 # price_int = int(price_split[0])
 # print(price_int)
